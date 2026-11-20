@@ -25,36 +25,19 @@
 <!-- load utils -->
 <script src="script/utils/media.js"></script>
 <script src="script/utils/stimulus.js"></script>
+<script src="script/utils/time.js"></script>
 
 <!-- load trials -->
 <script src="script/instruction_trial.js"></script>
 <script src="script/semantic_training_trial.js"></script>
 <script src="script/forced_choice_test_trial.js"></script>
 <script src="script/touch_box_trial.js"></script>
-<script src="script/exposure_trial.js"></script>
-<script src="script/attention_trial.js"></script>
-<script src="script/break_trial.js"></script>
-<script src="script/test_trial.js"></script>
-<script src="script/ending_trial.js"></script>
 
 <!-- load procedures -->
 <script src="script/procedures/introduction.js"></script>
 <script src="script/procedures/semantic_training.js"></script>
 <script src="script/procedures/forced_choice_test.js"></script>
-<script src="script/procedures/instruction_exposure_ready.js"></script>
-<script src="script/procedures/break.js"></script>
-<script src="script/procedures/attention.js"></script>
 <script src="script/procedures/touch_box.js"></script>
-<!-- <script src="script/procedures/attention_probabilistic.js"></script> -->
-<script src="script/procedures/exposure.js"></script>
-<!-- <script src="script/procedures/exposure_probabilistic.js"></script> -->
-<script src="script/procedures/exposure_practice.js"></script>
-<script src="script/procedures/instruction_test.js"></script>
-<script src="script/procedures/instruction_test_ready.js"></script>
-<script src="script/procedures/test.js"></script>
-<!-- <script src="script/procedures/test_probabilistic.js"></script> -->
-<script src="script/procedures/test_practice.js"></script>
-<script src="script/procedures/ending.js"></script>
 
 <!-- construct experiment -->
 <script>
@@ -118,7 +101,7 @@ const timeline = [];
 // ...add your trials to the timeline...
 // timeline.push(preload);
 timeline.push(instructions);
-  timeline.push(instruction_introduction_procedure);
+  // timeline.push(instruction_introduction_procedure);
   timeline.push(touch_box_procedure1);
   timeline.push(semantic_training_procedure1);
   timeline.push(touch_box_procedure2);

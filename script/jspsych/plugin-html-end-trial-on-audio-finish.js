@@ -156,14 +156,51 @@ var jsPsychHtmlEndTrialOnAudioFinish = (function (jspsych) {
         rt: null,
         button: null
       };
+
+      const audioTiming = {
+        audio_request_ms: null,
+        audio_onset_ms: null,
+        audio_offset_ms: null
+    };
+      // const end_trial = () => {
+      //   var trial_data = {
+      //     rt: response.rt,
+      //     stimulus: trial.stimulus,
+      //     response: response.button
+      //   };
+      //   this.jsPsych.finishTrial(trial_data);
+      // };
+
+
       const end_trial = () => {
         var trial_data = {
-          rt: response.rt,
-          stimulus: trial.stimulus,
-          response: response.button
+            rt: response.rt,
+            stimulus: trial.stimulus,
+            response: response.button,
+    
+            // Audio timing
+            audio_request_ms: audioTiming.audio_request_ms,
+            audio_onset_ms: audioTiming.audio_onset_ms,
+            audio_offset_ms: audioTiming.audio_offset_ms,
+    
+            // Derived timing measures
+            audio_start_delay_ms:
+                audioTiming.audio_onset_ms !== null
+                    ? audioTiming.audio_onset_ms -
+                      audioTiming.audio_request_ms
+                    : null,
+    
+            audio_playback_elapsed_ms:
+                audioTiming.audio_offset_ms !== null &&
+                audioTiming.audio_onset_ms !== null
+                    ? audioTiming.audio_offset_ms -
+                      audioTiming.audio_onset_ms
+                    : null
         };
+    
         this.jsPsych.finishTrial(trial_data);
-      };
+    };
+  
       function after_response(choice) {
         var end_time = performance.now();
         var rt = Math.round(end_time - start_time);
@@ -194,11 +231,41 @@ var jsPsychHtmlEndTrialOnAudioFinish = (function (jspsych) {
           }
         }, trial.enable_button_after);
       }
-      if (trial.audio !== null) {
-        var audio = new Audio(trial.audio);
-        audio.addEventListener("ended", end_trial);
-        audio.play();
-      }
+      // if (trial.audio !== null) {
+      //   var audio = new Audio(trial.audio);
+      //   audio.addEventListener("ended", end_trial);
+      //   audio.play();
+      // }
+
+        if (trial.audio !== null) {
+
+          // Preserve the original audio path handling
+          var audio = new Audio(trial.audio);
+
+          // Record when audio actually begins playing
+          audio.addEventListener("playing", () => {
+              if (audioTiming.audio_onset_ms === null) {
+                  audioTiming.audio_onset_ms = performance.now();
+              }
+          });
+
+          // Record when audio finishes and end the trial
+          audio.addEventListener("ended", () => {
+              audioTiming.audio_offset_ms = performance.now();
+              end_trial();
+          }, { once: true });
+
+          // Record when playback is requested
+          audioTiming.audio_request_ms = performance.now();
+
+          audio.play().catch(error => {
+              console.error("Audio playback failed:", audio.src, error);
+          });
+        }
+
+
+
+
     }
     simulate(trial, simulation_mode, simulation_options, load_callback) {
       if (simulation_mode == "data-only") {
