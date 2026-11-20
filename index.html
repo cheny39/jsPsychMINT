@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>MINT</title>
+  <script src="https://unpkg.com/jspsych@8.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.0.0"></script>
+  <!-- A custom plugin that adds a green box around the button when it's clicked -->
+  <script src="script/jspsych/plugin-html-button-response-green-box.js"></script>
+  <!-- A custom plugin that ends the trial when the audio is finished playing -->
+  <script src="script/jspsych/plugin-html-end-trial-on-audio-finish.js"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-button-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/extension-pipe@0.2.0"></script>
+  <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
+  <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body></body>
+<!-- always init JsPsych first -->
+<script src="script/init.js"></script>
+
+<!-- load utils -->
+<script src="script/utils/media.js"></script>
+<script src="script/utils/stimulus.js"></script>
+
+<!-- load trials -->
+<script src="script/instruction_trial.js"></script>
+<script src="script/semantic_training_trial.js"></script>
+<script src="script/forced_choice_test_trial.js"></script>
+<script src="script/touch_box_trial.js"></script>
+<script src="script/exposure_trial.js"></script>
+<script src="script/attention_trial.js"></script>
+<script src="script/break_trial.js"></script>
+<script src="script/test_trial.js"></script>
+<script src="script/ending_trial.js"></script>
+
+<!-- load procedures -->
+<script src="script/procedures/introduction.js"></script>
+<script src="script/procedures/semantic_training.js"></script>
+<script src="script/procedures/forced_choice_test.js"></script>
+<script src="script/procedures/instruction_exposure_ready.js"></script>
+<script src="script/procedures/break.js"></script>
+<script src="script/procedures/attention.js"></script>
+<script src="script/procedures/touch_box.js"></script>
+<!-- <script src="script/procedures/attention_probabilistic.js"></script> -->
+<script src="script/procedures/exposure.js"></script>
+<!-- <script src="script/procedures/exposure_probabilistic.js"></script> -->
+<script src="script/procedures/exposure_practice.js"></script>
+<script src="script/procedures/instruction_test.js"></script>
+<script src="script/procedures/instruction_test_ready.js"></script>
+<script src="script/procedures/test.js"></script>
+<!-- <script src="script/procedures/test_probabilistic.js"></script> -->
+<script src="script/procedures/test_practice.js"></script>
+<script src="script/procedures/ending.js"></script>
+
+<!-- construct experiment -->
+<script>
+  var instructions = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "Welcome to the experiment!",
+    choices: ["Begin"]
+  };
+  
+const jsPsych = initJsPsych({
+extensions: [
+    {
+      type: jsPsychExtensionPipe,
+      params: {
+        experiment_id: "ainm24f0q9xl",
+        filename: () => `${subject_id}.csv`
+      }
+    }
+  ]
+});
+
+const subject_id = jsPsych.randomization.randomID(10);
+const timeline = [];
+// ...add your trials to the timeline...
+// timeline.push(preload);
+timeline.push(instructions);
+  timeline.push(instruction_introduction_procedure);
+  timeline.push(touch_box_procedure1);
+  timeline.push(semantic_training_procedure1);
+  timeline.push(touch_box_procedure2);
+  timeline.push(semantic_training_procedure2);
+  timeline.push(touch_box_procedure3);
+  timeline.push(semantic_training_procedure3);
+  timeline.push(touch_box_procedure4);
+  timeline.push(semantic_training_procedure4);
+  timeline.push(touch_box_procedure5);
+  timeline.push(semantic_training_procedure5);
+  timeline.push(touch_box_procedure6);
+  timeline.push(semantic_training_procedure6);
+  timeline.push(instruction_repetition_procedure);
+  timeline.push(touch_box_procedure1);
+  timeline.push(semantic_training_procedure7);
+  timeline.push(touch_box_procedure2);
+  timeline.push(semantic_training_procedure8);
+  timeline.push(touch_box_procedure3);
+  timeline.push(semantic_training_procedure9);
+  timeline.push(touch_box_procedure4);
+  timeline.push(semantic_training_procedure10);
+  timeline.push(touch_box_procedure5);
+  timeline.push(semantic_training_procedure11);
+  timeline.push(touch_box_procedure6);
+  timeline.push(semantic_training_procedure12);
+  timeline.push(instruction_test_procedure);
+  timeline.push(forced_choice_test_familiar_procedure);
+  timeline.push(instruction_test_real_procedure);
+  timeline.push(forced_choice_test_procedure1);
+  timeline.push(instruction_test_halfway_procedure);
+  timeline.push(forced_choice_test_procedure2);
+  timeline.push(instruction_end_procedure);
+
+jsPsych.run(timeline);
+
+
+</script>
+
+</html>
