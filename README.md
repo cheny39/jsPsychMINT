@@ -1,1 +1,1 @@
-# Index_v4
+# MINT study code
