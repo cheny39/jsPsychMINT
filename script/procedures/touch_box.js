@@ -9,10 +9,10 @@ let touch_box_procedure1 = {
         {
             image: 'first_box.png',
             audio: 'Training_Instructions_Box.wav',
-            left: 465,
-            top: 170,
-            width: 200,
-            height: 200,
+            left: 400,
+            top: 140,
+            width: 242,
+            height: 242,
         }
     ]
 };
@@ -25,9 +25,9 @@ let touch_box_procedure2 = {
             image: 'second_box.png',
             audio: 'Training_Instructions_Box.wav',
             left: 730,
-            top: 170,
-            width: 200,
-            height: 200,
+            top: 140,
+            width: 242,
+            height: 242,
         }
     ]
 };
@@ -39,10 +39,10 @@ let touch_box_procedure3 = {
         {
             image: 'third_box.png',
             audio: 'Training_Instructions_Box.wav',
-            left: 985,
-            top: 170,
-            width: 200,
-            height: 200,
+            left: 1045,
+            top: 140,
+            width: 242,
+            height: 242,
         }
     ]
 };
@@ -53,10 +53,10 @@ let touch_box_procedure4 = {
         {
             image: 'fourth_box.png',
             audio: 'Training_Instructions_Box.wav',
-            left: 465,
-            top: 410,
-            width: 200,
-            height: 200,
+            left: 400,
+            top: 430,
+            width: 242,
+            height: 242,
         }
     ]
 };
@@ -68,9 +68,9 @@ let touch_box_procedure5 = {
             image: 'fifth_box.png',
             audio: 'Training_Instructions_Box.wav',
             left: 730,
-            top: 410,
-            width: 200,
-            height: 200,
+            top: 430,
+            width: 242,
+            height: 242,
         }
     ]
 };
@@ -81,10 +81,10 @@ let touch_box_procedure6 = {
         {
             image: 'sixth_box.png',
             audio: 'Training_Instructions_Box.wav',
-            left: 985,
-            top: 410,
-            width: 200,
-            height: 200,
+            left: 1045,
+            top: 430,
+            width: 242,
+            height: 242,
         }
     ]
 };

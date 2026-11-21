@@ -91,7 +91,7 @@ let forced_choice_test_trial = {
                        margin: 0;
                        z-index: 2;
                        background-color: transparent;
-                       border: 3px solid red;
+                       border: none;
                        pointer-events: auto;
                        touch-action: manipulation;"
                 disabled>
@@ -165,7 +165,7 @@ let forced_choice_test_trial = {
                     aspectRatio: '398 / 418',
                     padding: '0',
                     margin: '0',
-                    border: '3px solid red',
+                    border: 'none',
                     background: 'transparent',
                     display: 'block',
                     zIndex: '20',
