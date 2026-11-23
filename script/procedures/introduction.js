@@ -44,7 +44,7 @@ let instruction_test_real_procedure = {
     timeline_variables:
         [
         {
-            'audio': 'wav/Test_instructions.wav',
+            'audio': 'wav/Test_Instructions.wav',
             'image': 'opening_background.png'
         }
     
