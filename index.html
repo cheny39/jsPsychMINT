@@ -96,44 +96,149 @@ extensions: [
   ]
 });
 
+
+//
+// PRELOAD IMAGES AND AUDIO
+//
+
+// All procedures used in the experiment
+const preloadProcedures = [
+
+    // Introduction
+    instruction_introduction_procedure,
+
+    // Touch-box trials
+    touch_box_procedure1,
+    touch_box_procedure2,
+    touch_box_procedure3,
+    touch_box_procedure4,
+    touch_box_procedure5,
+    touch_box_procedure6,
+
+    // Semantic training trials
+    semantic_training_procedure1,
+    semantic_training_procedure2,
+    semantic_training_procedure3,
+    semantic_training_procedure4,
+    semantic_training_procedure5,
+    semantic_training_procedure6,
+    semantic_training_procedure7,
+    semantic_training_procedure8,
+    semantic_training_procedure9,
+    semantic_training_procedure10,
+    semantic_training_procedure11,
+    semantic_training_procedure12,
+
+    // Repetition instructions
+    instruction_repetition_procedure,
+
+    // Test instructions
+    instruction_test_procedure,
+    instruction_test_real_procedure,
+    instruction_test_halfway_procedure,
+
+    // Familiarization test
+    forced_choice_test_familiar_procedure,
+
+    // Main test
+    forced_choice_test_procedure1,
+    forced_choice_test_procedure2,
+
+    // Ending
+    instruction_end_procedure
+];
+
+// Collect timeline variables from all procedures
+const preloadItems = preloadProcedures.flatMap(
+    procedure => procedure.timeline_variables || []
+);
+
+// Add folder prefix only if the path doesn't have one
+function preloadPath(folder, filename) {
+    if (typeof filename !== 'string' || !filename) {
+        return null;
+    }
+
+    return filename.includes('/')
+        ? filename
+        : `${folder}/${filename}`;
+}
+
+// Build the preload trial
+var preload = {
+    type: jsPsychPreload,
+
+    // Explicitly list files because many are embedded in HTML
+    auto_preload: false,
+
+    images: [
+        ...new Set([
+            // Backgrounds specified directly in trial code
+            'image/training_background.png',
+            'image/test_background.png',
+
+            // Images specified in procedure variables
+            ...preloadItems.flatMap(item => [
+                item.image,
+                item.left,
+                item.right
+            ])
+            .map(file => preloadPath('image', file))
+            .filter(Boolean)
+        ])
+    ],
+
+    audio: [
+        ...new Set(
+            preloadItems
+                .map(item => preloadPath('wav', item.audio))
+                .filter(Boolean)
+        )
+    ],
+
+    // Stop experiment if a required file fails to load
+    continue_after_error: false
+};
+
+
 const subject_id = jsPsych.randomization.randomID(10);
 const timeline = [];
 // ...add your trials to the timeline...
-// timeline.push(preload);
+timeline.push(preload);
 timeline.push(instructions);
-  // timeline.push(instruction_introduction_procedure);
-  // timeline.push(touch_box_procedure1);
-  // timeline.push(semantic_training_procedure1);
-  // timeline.push(touch_box_procedure2);
-  // timeline.push(semantic_training_procedure2);
-  // timeline.push(touch_box_procedure3);
-  // timeline.push(semantic_training_procedure3);
-  // timeline.push(touch_box_procedure4);
-  // timeline.push(semantic_training_procedure4);
-  // timeline.push(touch_box_procedure5);
-  // timeline.push(semantic_training_procedure5);
-  // timeline.push(touch_box_procedure6);
-  // timeline.push(semantic_training_procedure6);
-  // timeline.push(instruction_repetition_procedure);
-  timeline.push(touch_box_procedure1);
-  // timeline.push(semantic_training_procedure7);
-  timeline.push(touch_box_procedure2);
-  // timeline.push(semantic_training_procedure8);
-  timeline.push(touch_box_procedure3);
-  // timeline.push(semantic_training_procedure9);
-  timeline.push(touch_box_procedure4);
-  // timeline.push(semantic_training_procedure10);
-  timeline.push(touch_box_procedure5);
-  // timeline.push(semantic_training_procedure11);
-  timeline.push(touch_box_procedure6);
-  // timeline.push(semantic_training_procedure12);
-  // timeline.push(instruction_test_procedure);
-  timeline.push(forced_choice_test_familiar_procedure);
-  // timeline.push(instruction_test_real_procedure);
-  timeline.push(forced_choice_test_procedure1);
-  timeline.push(instruction_test_halfway_procedure);
-  timeline.push(forced_choice_test_procedure2);
-  timeline.push(instruction_end_procedure);
+timeline.push(instruction_introduction_procedure);
+timeline.push(touch_box_procedure1);
+timeline.push(semantic_training_procedure1);
+timeline.push(touch_box_procedure2);
+timeline.push(semantic_training_procedure2);
+timeline.push(touch_box_procedure3);
+timeline.push(semantic_training_procedure3);
+timeline.push(touch_box_procedure4);
+timeline.push(semantic_training_procedure4);
+timeline.push(touch_box_procedure5);
+timeline.push(semantic_training_procedure5);
+timeline.push(touch_box_procedure6);
+timeline.push(semantic_training_procedure6);
+timeline.push(instruction_repetition_procedure);
+timeline.push(touch_box_procedure1);
+timeline.push(semantic_training_procedure7);
+timeline.push(touch_box_procedure2);
+timeline.push(semantic_training_procedure8);
+timeline.push(touch_box_procedure3);
+timeline.push(semantic_training_procedure9);
+timeline.push(touch_box_procedure4);
+timeline.push(semantic_training_procedure10);
+timeline.push(touch_box_procedure5);
+timeline.push(semantic_training_procedure11);
+timeline.push(touch_box_procedure6);
+timeline.push(semantic_training_procedure12);
+timeline.push(instruction_test_procedure);
+timeline.push(forced_choice_test_familiar_procedure);
+timeline.push(instruction_test_real_procedure);
+timeline.push(forced_choice_test_procedure1);
+timeline.push(instruction_test_halfway_procedure);
+timeline.push(forced_choice_test_procedure2);
+timeline.push(instruction_end_procedure);
 
 jsPsych.run(timeline);
 

@@ -165,7 +165,7 @@ let touch_box_trial = {
 
                 padding: '0',
                 margin: '0',
-                border: '3px solid red', // Debug border
+                border: 'none', // Debug border
                 background: 'transparent',
                 display: 'block',
                 zIndex: '20',
